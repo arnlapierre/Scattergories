@@ -108,7 +108,6 @@ class MyWindow(QtWidgets.QWidget):
         # initialisation des variables secondes (int), minutes (int), temps (datetime)
         self.minutes_restantes = self.ui.timer.time().minute()
         self.secondes_restantes = self.ui.timer.time().second()
-        print(self.minutes_restantes, self.secondes_restantes)
 
         # État des boutons au Temps 0
         self.ui.pushButton_start.setEnabled(False)
