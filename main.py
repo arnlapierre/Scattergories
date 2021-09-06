@@ -11,7 +11,7 @@ import sys
 import json
 from app_window import Ui_Scattergories
 from PyQt6 import QtCore, QtGui, QtWidgets
-from jeu_scattergories import coup_de_dé
+import Lancer_de_dé
 
 
 class MyWindow(QtWidgets.QWidget):
@@ -45,7 +45,6 @@ class MyWindow(QtWidgets.QWidget):
         self.secondes_restantes = 0
         self.lettre_finale = "A"
         self.pause = False
-
 
     def afficher_questions(self):
 
@@ -109,6 +108,7 @@ class MyWindow(QtWidgets.QWidget):
         # initialisation des variables secondes (int), minutes (int), temps (datetime)
         self.minutes_restantes = self.ui.timer.time().minute()
         self.secondes_restantes = self.ui.timer.time().second()
+        print(self.minutes_restantes, self.secondes_restantes)
 
         # État des boutons au Temps 0
         self.ui.pushButton_start.setEnabled(False)
@@ -167,16 +167,16 @@ class MyWindow(QtWidgets.QWidget):
         self.timer_de.timeout.connect(self.choix_lettre)
 
     def choix_lettre(self):
-        self.ui.lettre.setText(coup_de_dé())
+        self.ui.lettre.setText(Lancer_de_dé.coup_de_dé())
 
     def choix_lettre_finale(self):
-        self.lettre_finale = coup_de_dé()
+        self.lettre_finale = Lancer_de_dé.coup_de_dé()
         self.ui.lettre.setText(self.lettre_finale)
 
     def commencer_partie(self):
-        self.timer_dé.stop()
-        self.start_countdown()
+        self.timer_de.stop()
         self.choix_lettre_finale()
+        self.start_countdown()
 
 
 def main():
